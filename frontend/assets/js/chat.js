@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 // Simulating Backend Call (Real endpoint can be /api/chat/message)
                 // For now, we will still use local logic but prep for API
-                // const res = await fetch('http://localhost:5001/api/chat/message', { ... });
+                // const res = await fetch('https://bhinchar-india-tours-backend.onrender.com/api/chat/message', { ... });
 
                 setTimeout(() => {
                     let response = "I'm connected to the backend! Ask me about our 3 exclusive tours.";

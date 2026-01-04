@@ -1,5 +1,5 @@
 
-const API_URL = 'http://localhost:5001/api/tours';
+const API_URL = 'https://bhinchar-india-tours-backend.onrender.com/api/tours';
 
 // Fetch and display tours
 async function fetchTours() {

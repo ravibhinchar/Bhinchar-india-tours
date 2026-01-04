@@ -15,7 +15,7 @@ if (loginForm) {
             submitBtn.textContent = 'Logging in...';
             submitBtn.disabled = true;
 
-            const res = await fetch('http://localhost:5001/api/auth/login', {
+            const res = await fetch('https://bhinchar-india-tours-backend.onrender.com/api/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
