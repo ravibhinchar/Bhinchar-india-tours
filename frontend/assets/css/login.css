@@ -153,3 +153,25 @@
   color: var(--bright-navy-blue);
   font-weight: 600;
 }
+
+/* Fallback Background if Video is Missing */
+.login-container {
+  background: var(--oxford-blue); /* Fallback dark color */
+  background: linear-gradient(135deg, var(--oxford-blue), var(--black)); /* Gradient for better look */
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 480px) {
+  .login-box {
+    width: 90%;
+    padding: 30px 20px;
+  }
+
+  .h2 {
+    font-size: 1.5rem;
+  }
+
+  .login-logo {
+    max-width: 120px;
+  }
+}
