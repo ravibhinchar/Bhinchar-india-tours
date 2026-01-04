@@ -1,0 +1,155 @@
+/* Login Page Specific Styles */
+
+.login-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.login-container .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Darken video */
+  z-index: 0;
+}
+
+.login-box {
+  position: relative;
+  z-index: 1;
+  width: 400px;
+  padding: 40px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.login-logo {
+  display: block;
+  margin: 0 auto 10px;
+  max-width: 150px;
+  filter: brightness(0) invert(1); /* Make logo white if it's dark, adjust as needed */
+}
+
+.input-group {
+  position: relative;
+  width: 100%;
+}
+
+.input-group ion-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--white);
+  font-size: 1.2rem;
+}
+
+.input-group .input-field {
+  width: 100%;
+  padding: 12px 15px 12px 45px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  color: var(--white);
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.input-group .input-field::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.input-group .input-field:focus {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: var(--bright-navy-blue);
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--white);
+}
+
+.forgot-pass {
+  color: var(--bright-navy-blue);
+  text-decoration: none;
+}
+
+.login-btn {
+  width: 100%;
+  border-radius: 50px;
+  justify-content: center;
+}
+
+.divider {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.8rem;
+  margin: 10px 0;
+  position: relative;
+}
+
+.divider::before, .divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.divider::before { left: 0; }
+.divider::after { right: 0; }
+
+.skip-btn {
+  width: 100%;
+  border-radius: 50px;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--white);
+  color: var(--white);
+}
+
+.skip-btn:hover {
+  background: var(--white);
+  color: var(--gunmetal);
+}
+
+.signup-link {
+  text-align: center;
+  color: var(--white);
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+.signup-link a {
+  color: var(--bright-navy-blue);
+  font-weight: 600;
+}

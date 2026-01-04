@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - BhincharIndiaTours</title>
+    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/login.css">
+    <link rel="stylesheet" href="assets/css/chat.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</head>
+
+<body>
+
+    <div class="login-container">
+        <!-- Background Video -->
+        <video autoplay muted loop playsinline class="bg-video">
+            <source src="assets/SSvid.net--Rajasthan-from-the-Sky-Cinematic-Aerial-Drone-View_1080p.mp4"
+                type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="overlay"></div>
+
+        <div class="login-box glass-effect">
+            <div class="logo-area">
+                <img src="./assets/images/logo.svg" alt="BhincharIndiaTours Logo" class="login-logo">
+            </div>
+
+            <h2 class="h2" style="color: var(--white); text-align: center; margin-bottom: 20px;">Create Account</h2>
+
+            <form action="#" class="login-form" id="registerForm">
+                <div class="input-group">
+                    <ion-icon name="person-outline"></ion-icon>
+                    <input type="text" id="name" placeholder="Full Name" required class="input-field">
+                </div>
+
+                <div class="input-group">
+                    <ion-icon name="mail-outline"></ion-icon>
+                    <input type="email" id="email" placeholder="Email Address" required class="input-field">
+                </div>
+
+                <div class="input-group">
+                    <ion-icon name="lock-closed-outline"></ion-icon>
+                    <input type="password" id="password" placeholder="Password" required class="input-field">
+                </div>
+
+                <div class="input-group">
+                    <ion-icon name="lock-closed-outline"></ion-icon>
+                    <input type="password" id="confirmPassword" placeholder="Confirm Password" required
+                        class="input-field">
+                </div>
+
+                <button type="submit" class="btn btn-secondary login-btn" style="margin-top: 20px;">Sign Up</button>
+            </form>
+
+            <div class="divider">
+                <span>OR</span>
+            </div>
+
+            <p class="signup-link">
+                Already have an account? <a href="login.html">Login</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="./assets/js/chat.js"></script>
+    <script src="./assets/js/register.js"></script>
+</body>
+
+</html>
