@@ -95,19 +95,38 @@ async function fetchTours() {
 }
 
 // Handle Booking Logic
-window.handleBooking = function (tourId, tourTitle) {
+window.handleBooking = async function (tourId, tourTitle) {
   const token = localStorage.getItem('token');
 
   if (!token) {
-    // User not logged in
     const confirmLogin = confirm("You need to login to book a tour. Go to login page?");
     if (confirmLogin) {
       window.location.href = 'login.html';
     }
   } else {
-    // User is logged in
-    // Ideally, call a booking API here. For now, show success.
-    alert(`Great choice! You have successfully started the booking process for "${tourTitle}". \n\n(This is a demo. Backend booking integration would happen here.)`);
+    // Call Booking API
+    try {
+      const res = await fetch('https://bhinchar-india-tours-backend.onrender.com/api/bookings', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ tourId, tourTitle })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert(`Success! Your booking for "${tourTitle}" has been sent.\nCheck your Dashboard for status.`);
+        window.location.href = 'profile.html';
+      } else {
+        alert(`Booking Failed: ${data.message}`);
+      }
+    } catch (error) {
+      console.error('Booking Error:', error);
+      alert('Something went wrong. Please try again.');
+    }
   }
 };
 
@@ -127,4 +146,14 @@ function checkAuthState() {
 document.addEventListener('DOMContentLoaded', () => {
   fetchTours();
   checkAuthState();
+
+  // Inquiry Form Handler
+  const inquiryForm = document.querySelector('.tour-search-form');
+  if (inquiryForm) {
+    inquiryForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you for your inquiry! We have received your details and will contact you shortly.');
+      inquiryForm.reset();
+    });
+  }
 });

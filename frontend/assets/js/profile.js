@@ -37,6 +37,41 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.error('Failed to fetch user data');
             logout();
         }
+
+        // ----------------------------------------
+        // 1.5 Fetch User Bookings
+        // ----------------------------------------
+        const bookingRes = await fetch('https://bhinchar-india-tours-backend.onrender.com/api/bookings/my-bookings', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (bookingRes.ok) {
+            const bookings = await bookingRes.json();
+            const listContainer = document.getElementById('bookingsList');
+            const countEl = document.getElementById('bookingCount');
+
+            if (countEl) countEl.textContent = bookings.length;
+
+            if (bookings.length === 0) {
+                listContainer.innerHTML = '<p style="color: #666;">No bookings found. Time to explore!</p>';
+            } else {
+                listContainer.innerHTML = bookings.map(b => `
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; border: 1px solid #ddd; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h4 style="color: var(--oxford-blue); font-weight: 600; margin-bottom: 5px;">${b.tourTitle}</h4>
+                            <p style="font-size: 0.85rem; color: #666;">${new Date(b.createdAt).toLocaleDateString()}</p>
+                        </div>
+                        <span style="background: ${b.status === 'Confirmed' ? '#d4edda' : '#fff3cd'}; color: ${b.status === 'Confirmed' ? '#155724' : '#856404'}; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 500;">
+                            ${b.status}
+                        </span>
+                    </div>
+                `).join('');
+            }
+        }
+
     } catch (error) {
         console.error('Error:', error);
         // Optional: logout() on network error?
