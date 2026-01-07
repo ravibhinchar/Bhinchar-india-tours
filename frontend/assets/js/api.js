@@ -125,7 +125,7 @@ window.handleBooking = async function (tourId, tourTitle) {
       }
     } catch (error) {
       console.error('Booking Error:', error);
-      alert('Something went wrong. Please try again.');
+      alert(`Error: ${error.message}\n(Possible causes: weak internet, server restarting, or CORS issue)`);
     }
   }
 };
