@@ -31,6 +31,7 @@ const registerUser = async (req, res) => {
             _id: user.id,
             name: user.name,
             email: user.email,
+            role: user.role, // Include role
             token: generateToken(user._id),
         });
     } else {
@@ -52,6 +53,7 @@ const loginUser = async (req, res) => {
             _id: user.id,
             name: user.name,
             email: user.email,
+            role: user.role, // Include role
             token: generateToken(user._id),
         });
     } else {
@@ -73,8 +75,54 @@ const generateToken = (id) => {
     });
 };
 
+// @desc    Google Login/Register
+// @route   POST /api/auth/google
+// @access  Public
+const googleLogin = async (req, res) => {
+    const { email, name, googleId } = req.body;
+
+    try {
+        // Check if user exists
+        let user = await User.findOne({ email });
+
+        if (user) {
+            // User exists, login them
+            res.json({
+                _id: user.id,
+                name: user.name,
+                email: user.email,
+                role: user.role, // Include role
+                token: generateToken(user._id),
+            });
+        } else {
+            // Create new user
+            // Generate a random password since they use Google
+            const randomPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
+
+            user = await User.create({
+                name,
+                email,
+                password: randomPassword,
+                role: 'user' // Default to user
+            });
+
+            res.status(201).json({
+                _id: user.id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
+                token: generateToken(user._id),
+            });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server Error during Google Login' });
+    }
+};
+
 module.exports = {
     registerUser,
     loginUser,
     getMe,
+    googleLogin
 };

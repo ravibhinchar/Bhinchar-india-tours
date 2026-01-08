@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
-        const res = await fetch('https://bhinchar-india-tours-backend.onrender.com/api/auth/me', {
+        const res = await fetch(`${window.BACKEND_URL}/api/auth/me`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -33,6 +33,26 @@ document.addEventListener('DOMContentLoaded', async () => {
             updateEl('displayName', user.name);
             updateEl('displayEmail', user.email);
 
+            // If Admin, add Admin Panel link to Sidebar
+            if (user.role === 'admin') {
+                const menu = document.querySelector('.sidebar-menu');
+                // Check if already exists to avoid dupes
+                if (menu && !document.getElementById('adminLink')) {
+                    const adminLi = document.createElement('li');
+                    adminLi.className = 'menu-item';
+                    adminLi.id = 'adminLink';
+                    adminLi.innerHTML = `
+                        <a href="admin.html" class="menu-link" style="color: #007bff; font-weight: 600;">
+                            <ion-icon name="shield-checkmark-outline"></ion-icon>
+                            <span>Admin Panel</span>
+                        </a>
+                    `;
+                    // Insert before Logout (which is in footer, but specific sidebar structure might vary)
+                    // Append to menu
+                    menu.appendChild(adminLi);
+                }
+            }
+
         } else {
             console.error('Failed to fetch user data');
             logout();
@@ -41,7 +61,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         // ----------------------------------------
         // 1.5 Fetch User Bookings
         // ----------------------------------------
-        const bookingRes = await fetch('https://bhinchar-india-tours-backend.onrender.com/api/bookings/my-bookings', {
+        const bookingRes = await fetch(`${window.BACKEND_URL}/api/bookings/my-bookings`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`

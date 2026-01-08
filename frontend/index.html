@@ -26,6 +26,9 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
     rel="stylesheet">
+  <!-- Flatpickr (Calendar) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
 </head>
 
 <body id="top">
@@ -201,11 +204,19 @@
             <div class="input-wrapper" style="position: relative;">
               <label for="destination" class="input-label">Choose Your Destination*</label>
               <input type="text" name="destination" id="destination" required placeholder="Enter Destination"
-                class="input-field" autocomplete="off">
-              <!-- suggestions box -->
-              <ul id="suggestions"
-                style="position:absolute; top:100%; left:0; right:0; background:#fff; border:1px solid #ddd; list-style:none; margin:0; padding:0; max-height:200px; overflow-y:auto; z-index:1000; display:none;">
-              </ul>
+                class="input-field" list="rajasthan-destinations">
+              <datalist id="rajasthan-destinations">
+                <option value="Jaipur">
+                <option value="Udaipur">
+                <option value="Jodhpur">
+                <option value="Jaisalmer">
+                <option value="Pushkar">
+                <option value="Mount Abu">
+                <option value="Bikaner">
+                <option value="Ajmer">
+                <option value="Chittorgarh">
+                <option value="Ranthambore">
+              </datalist>
             </div>
 
             <div class="input-wrapper">
@@ -214,12 +225,12 @@
             </div>
 
             <div class="input-wrapper">
-              <label for="checkin" class="input-label">Checkin Date*</label>
+              <label for="checkin" class="input-label">Coming Date*</label>
               <input type="date" name="checkin" id="checkin" required class="input-field">
             </div>
 
             <div class="input-wrapper">
-              <label for="checkout" class="input-label">Checkout Date*</label>
+              <label for="checkout" class="input-label">Expected Leaving Date*</label>
               <input type="date" name="checkout" id="checkout" required class="input-field">
             </div>
 
@@ -821,6 +832,28 @@
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
+  <!-- Config -->
+  <script src="./assets/js/config.js"></script>
+
+  <!-- Flatpickr JS -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const checkinPicker = flatpickr("#checkin", {
+        minDate: "today",
+        dateFormat: "Y-m-d",
+        theme: "dark",
+        onChange: function (selectedDates, dateStr, instance) {
+          checkoutPicker.set('minDate', dateStr);
+        }
+      });
+      const checkoutPicker = flatpickr("#checkout", {
+        minDate: "today",
+        dateFormat: "Y-m-d",
+        theme: "dark"
+      });
+    });
+  </script>
 </body>
 
 </html>

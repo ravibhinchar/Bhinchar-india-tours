@@ -1,5 +1,5 @@
 
-const API_URL = 'https://bhinchar-india-tours-backend.onrender.com/api/tours';
+const API_URL = `${window.BACKEND_URL}/api/tours`;
 
 // Fetch and display tours
 async function fetchTours() {
@@ -65,11 +65,11 @@ async function fetchTours() {
                         <p class="reviews">(${tour.reviews} reviews)</p>
 
                         <div class="card-rating">
-                          <ion-icon name="star"></ion-icon>
-                          <ion-icon name="star"></ion-icon>
-                          <ion-icon name="star"></ion-icon>
-                          <ion-icon name="star"></ion-icon>
-                          <ion-icon name="star"></ion-icon>
+                          ${Array.from({ length: 5 }, (_, i) => {
+          if (tour.rating >= i + 1) return '<ion-icon name="star"></ion-icon>';
+          if (tour.rating >= i + 0.5) return '<ion-icon name="star-half"></ion-icon>';
+          return '<ion-icon name="star-outline"></ion-icon>';
+        }).join('')}
                         </div>
 
                       </div>
@@ -106,7 +106,7 @@ window.handleBooking = async function (tourId, tourTitle) {
   } else {
     // Call Booking API
     try {
-      const res = await fetch('https://bhinchar-india-tours-backend.onrender.com/api/bookings', {
+      const res = await fetch(`${window.BACKEND_URL}/api/bookings`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -150,10 +150,47 @@ document.addEventListener('DOMContentLoaded', () => {
   // Inquiry Form Handler
   const inquiryForm = document.querySelector('.tour-search-form');
   if (inquiryForm) {
-    inquiryForm.addEventListener('submit', (e) => {
+    inquiryForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      alert('Thank you for your inquiry! We have received your details and will contact you shortly.');
-      inquiryForm.reset();
+
+      const submitBtn = inquiryForm.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
+
+      const formData = {
+        destination: document.getElementById('destination').value,
+        people: document.getElementById('people').value,
+        checkin: document.getElementById('checkin').value,
+        checkout: document.getElementById('checkout').value
+      };
+
+      // Add user ID if logged in
+      const user = JSON.parse(localStorage.getItem('user'));
+      if (user && user._id) {
+        formData.user = user._id;
+      }
+
+      try {
+        const res = await fetch(`${window.BACKEND_URL}/api/inquiries`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+
+        if (res.ok) {
+          alert('Thank you! Your inquiry has been sent to our team. We will contact you shortly.');
+          inquiryForm.reset();
+        } else {
+          alert('Failed to send inquiry. Please try again.');
+        }
+      } catch (error) {
+        console.error('Inquiry Error:', error);
+        alert('Network Error. Please try again later.');
+      } finally {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }
     });
   }
 });

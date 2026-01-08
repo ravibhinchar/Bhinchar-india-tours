@@ -85,8 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     if (lowerText.includes('tour') || lowerText.includes('package')) {
                         response = "We have packages for Kumbhalgarh, Jaisalmer, and Mount Abu. Which one interests you?";
-                    } else if (lowerText.includes('price')) {
-                        response = "Our tours range from $520 to $750. Best value allowed!";
+                    } else {
+                        response = "For more details, please contact us at: +91 8854948324. We are happy to help!";
                     }
 
                     addMessage(response, 'bot');

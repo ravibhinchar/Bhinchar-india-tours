@@ -51,9 +51,13 @@
     transform: translateY(20px);
     transition: all 0.3s ease;
     overflow: hidden;
+    display: none;
+    /* Hide completely initially */
 }
 
 .chat-window.active {
+    display: flex;
+    /* Show when active */
     opacity: 1;
     pointer-events: all;
     transform: translateY(0);

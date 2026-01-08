@@ -19,7 +19,7 @@ if (registerForm) {
             submitBtn.textContent = 'Creating Account...';
             submitBtn.disabled = true;
 
-            const res = await fetch('https://bhinchar-india-tours-backend.onrender.com/api/auth/register', {
+            const res = await fetch(`${window.BACKEND_URL}/api/auth/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
