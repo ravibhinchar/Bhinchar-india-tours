@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
             people,
             checkin,
             checkout,
-            user // ID if available
+            user
         });
 
         res.status(201).json(inquiry);

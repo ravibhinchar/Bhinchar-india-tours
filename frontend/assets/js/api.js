@@ -9,7 +9,7 @@ async function fetchTours() {
 
     const packageList = document.querySelector('.package-list');
     if (packageList && tours.length > 0) {
-      packageList.innerHTML = ''; // Clear hardcoded content
+      packageList.innerHTML = '';
 
       tours.forEach(tour => {
         const tourCard = `
@@ -104,7 +104,6 @@ window.handleBooking = async function (tourId, tourTitle) {
       window.location.href = 'login.html';
     }
   } else {
-    // Call Booking API
     try {
       const res = await fetch(`${window.BACKEND_URL}/api/bookings`, {
         method: 'POST',
@@ -139,7 +138,7 @@ function checkAuthState() {
     loginBtn.textContent = 'My Profile';
     loginBtn.href = 'profile.html';
     loginBtn.classList.remove('btn-primary');
-    loginBtn.classList.add('btn-secondary'); // Make it stand out or fit in
+    loginBtn.classList.add('btn-secondary');
   }
 }
 
@@ -165,7 +164,6 @@ document.addEventListener('DOMContentLoaded', () => {
         checkout: document.getElementById('checkout').value
       };
 
-      // Add user ID if logged in
       const user = JSON.parse(localStorage.getItem('user'));
       if (user && user._id) {
         formData.user = user._id;

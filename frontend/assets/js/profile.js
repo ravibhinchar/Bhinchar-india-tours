@@ -19,10 +19,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (res.ok) {
             const user = await res.json();
-            // Update UI elements
             const firstName = user.name.split(' ')[0];
 
-            // Safe update function
             const updateEl = (id, val) => {
                 const el = document.getElementById(id);
                 if (el) el.textContent = val;
@@ -33,34 +31,26 @@ document.addEventListener('DOMContentLoaded', async () => {
             updateEl('displayName', user.name);
             updateEl('displayEmail', user.email);
 
-            // If Admin, add Admin Panel link to Sidebar
-            if (user.role === 'admin') {
-                const menu = document.querySelector('.sidebar-menu');
-                // Check if already exists to avoid dupes
-                if (menu && !document.getElementById('adminLink')) {
-                    const adminLi = document.createElement('li');
-                    adminLi.className = 'menu-item';
-                    adminLi.id = 'adminLink';
-                    adminLi.innerHTML = `
+            const menu = document.querySelector('.sidebar-menu');
+            if (menu && !document.getElementById('adminLink')) {
+                const adminLi = document.createElement('li');
+                adminLi.className = 'menu-item';
+                adminLi.id = 'adminLink';
+                adminLi.innerHTML = `
                         <a href="admin.html" class="menu-link" style="color: #007bff; font-weight: 600;">
                             <ion-icon name="shield-checkmark-outline"></ion-icon>
                             <span>Admin Panel</span>
                         </a>
                     `;
-                    // Insert before Logout (which is in footer, but specific sidebar structure might vary)
-                    // Append to menu
-                    menu.appendChild(adminLi);
-                }
-            }
 
+                menu.appendChild(adminLi);
+            }
         } else {
             console.error('Failed to fetch user data');
             logout();
         }
 
-        // ----------------------------------------
-        // 1.5 Fetch User Bookings
-        // ----------------------------------------
+
         const bookingRes = await fetch(`${window.BACKEND_URL}/api/bookings/my-bookings`, {
             method: 'GET',
             headers: {
@@ -88,7 +78,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                             ${b.status}
                         </span>
                     </div>
-                `).join('');
+                    `).join('');
             }
         }
 

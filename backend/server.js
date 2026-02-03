@@ -1,5 +1,4 @@
 const express = require('express');
-// Trigger Nodemon Restart
 const cors = require('cors');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
@@ -7,15 +6,24 @@ const connectDB = require('./config/db');
 // Load environment variables
 dotenv.config();
 
-// Initialize Express App
 const app = express();
 
-// Connect to Database
 connectDB();
 
 // Middleware
-app.use(express.json()); // For parsing JSON data
-app.use(cors()); // Enable CORS
+app.use(express.json());
+const corsOptions = {
+    origin: [
+        'http://localhost:5001',
+        'http://localhost:5500',
+        'http://127.0.0.1:5500',
+        'https://bhinchar-india-tours.vercel.app'
+    ],
+    methods: 'GET,POST,PUT,DELETE',
+    credentials: true
+};
+
+app.use(cors(corsOptions));
 
 app.get('/', (req, res) => {
     res.send('BhincharIndiaTours API is running...');
@@ -29,10 +37,6 @@ app.use('/api/inquiries', require('./routes/inquiryRoutes'));
 
 
 
-// Port Configuration
-const PORT = process.env.PORT || 5000;
-
 app.listen(PORT, () => {
     console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
 });
-// Force redeploy timestamp

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Booking = require('../models/bookingModel');
-const { protect, admin } = require('../middleware/authMiddleware'); // Re-using auth middleware
+const { protect, admin } = require('../middleware/authMiddleware');
 
 // @desc    Create new booking
 // @route   POST /api/bookings
