@@ -6,5 +6,3 @@ const isLocalhost = window.location.hostname === 'localhost' || window.location.
 window.BACKEND_URL = isLocalhost
     ? 'http://localhost:5001'
     : 'https://bhinchar-india-tours-backend.onrender.com';
-
-console.log('Backend URL set to:', window.BACKEND_URL);
