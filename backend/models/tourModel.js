@@ -39,6 +39,14 @@ const tourSchema = mongoose.Schema(
             type: Boolean,
             default: false,
         },
+        category: {
+            type: String,
+            default: 'heritage'
+        },
+        highlights: {
+            type: [String],
+            default: []
+        }
     },
     {
         timestamps: true,
