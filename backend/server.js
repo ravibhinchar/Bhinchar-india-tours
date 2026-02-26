@@ -35,7 +35,7 @@ app.use('/api/tours', require('./routes/tourRoutes'));
 app.use('/api/bookings', require('./routes/bookingRoutes'));
 app.use('/api/inquiries', require('./routes/inquiryRoutes'));
 
-
+const PORT = process.env.PORT || 5001;
 
 app.listen(PORT, () => {
     console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
