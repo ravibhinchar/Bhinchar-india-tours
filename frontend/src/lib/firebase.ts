@@ -2,13 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBenRjztgdZX_gGLuFfw0GgW2nAkCS864c",
-    authDomain: "bhinchar-india-tours.firebaseapp.com",
-    projectId: "bhinchar-india-tours",
-    storageBucket: "bhinchar-india-tours.firebasestorage.app",
-    messagingSenderId: "56980684880",
-    appId: "1:56980684880:web:2ad036ceef6d440ece5155",
-    measurementId: "G-564Z0DJCZL"
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
+    measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 const app = initializeApp(firebaseConfig);
